@@ -5,6 +5,7 @@ import url from "node:url";
 import { DateTime } from "luxon"
 
 const app = express();
+
 const port = 3000;
 
 // Получаем путь до файла
@@ -13,6 +14,8 @@ const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const timeZone = "UTC"
+
+app.use(express.static(path.join(__dirname, "public")));
 
 const loadBuses = async () => {
     const data = await readFile(path.join(__dirname, "buses.json"), "utf-8");
@@ -47,10 +50,10 @@ const getNextDeparture = (time, gap) => {
     return departure;
 }
 
+const sortBuses = (buses) => [...buses].sort((a, b) => new Date(`${a.nextDeparture.date}T${a.nextDeparture.time}`) - new Date(`${b.nextDeparture.date}T${b.nextDeparture.time}`))
+
 const sendUpdatedData = async () => {
     const fetchedRoutes = await loadBuses();
-
-
 
     const buses = fetchedRoutes.map(route => {
         const nextDeparture = getNextDeparture(route.firstDepartureTime, route.frequencyMinutes);
@@ -65,9 +68,12 @@ const sendUpdatedData = async () => {
 app.get('/next-departure', async (request, response) => {
     try {
         const updatedBuses = await sendUpdatedData();
-        response.json(updatedBuses);
 
-        console.log("updated buses:", updatedBuses);
+        const sortedBuses = sortBuses(updatedBuses);
+
+        response.json(sortedBuses);
+
+        // console.log("updated buses:", updatedBuses);
     } catch(err) {
         console.error("Ошибка на сервере:", err);
         response.status(500).json({ error: err.message });
