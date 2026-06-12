@@ -37,14 +37,38 @@ const renderBusData = (buses) => {
             <td>${formatDate(nextDepartureDateTimeUTC)}</td>
             <td>${formatTime(nextDepartureDateTimeUTC)}</td>
             <td>${bus.frequencyMinutes}</td>
+            <td>${bus.nextDeparture.remaining}</td>
         `;
         tableBody.appendChild(row)
     });
 }
 
+const initWebSocket = () => {
+    const ws = new WebSocket(`ws://${location.host}`);
+
+    ws.addEventListener('open', () => {
+        console.log("WS connection established");
+    })
+
+    ws.addEventListener('message', (event) => {
+        const buses = JSON.parse(event.data);
+        renderBusData(buses);
+    })
+
+    ws.addEventListener('error', (error) => {
+        console.log(`WS error: ${error}`);
+    })
+
+    ws.addEventListener('close', () => {
+        console.log("WS connection closed");
+    })
+}
+
 const init = async () => {
     const buses = await fetchBusData();
     renderBusData(buses);
+
+    initWebSocket();
 }
 
 init()
