@@ -147,7 +147,7 @@
     "id": 17,
     "busNumber": "204",
     "startPoint": "г. Калининград",
-    "endPoint": "г. Прага(Чехия)",
+    "endPoint": "г. Прага (Чехия)",
     "firstDepartureTime": "11:30",
     "frequencyMinutes": 1440
   },
@@ -163,7 +163,7 @@
     "id": 19,
     "busNumber": "206",
     "startPoint": "г. Калининград",
-    "endPoint": "г. Таллин(Эстония)",
+    "endPoint": "г. Таллинн (Эстония)",
     "firstDepartureTime": "11:00",
     "frequencyMinutes": 1440
   },
@@ -171,7 +171,7 @@
     "id": 20,
     "busNumber": "300",
     "startPoint": "г. Калининград",
-    "endPoint": "г. Варшава(Польша)",
+    "endPoint": "г. Варшава (Польша)",
     "firstDepartureTime": "10:30",
     "frequencyMinutes": 1440
   },
@@ -179,7 +179,7 @@
     "id": 21,
     "busNumber": "301",
     "startPoint": "г. Калининград",
-    "endPoint": "г. Берлин(Германия)",
+    "endPoint": "г. Берлин (Германия)",
     "firstDepartureTime": "08:00",
     "frequencyMinutes": 1440
   },
@@ -187,7 +187,7 @@
     "id": 22,
     "busNumber": "302",
     "startPoint": "г. Калининград",
-    "endPoint": "г. Гданьск(Польша)",
+    "endPoint": "г. Гданьск (Польша)",
     "firstDepartureTime": "08:30",
     "frequencyMinutes": 1440
   }
